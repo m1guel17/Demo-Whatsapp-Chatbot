@@ -39,7 +39,7 @@ def update_conversation_logs(number , **kwargs):
         contexts['parent'] = {
             'function_name': parent_frame.function}
     if len(stack) > 2:
-        grandparent_frame = stack[1]
+        grandparent_frame = stack[2]
         contexts['grandparent'] = {
             'function_name': grandparent_frame.function}
         
