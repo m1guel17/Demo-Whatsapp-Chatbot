@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensajes Log</title>
+    <style>
+        table{
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th,td{
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th{
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Usuarios</h2>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>Nombre Completo</th>
+            <th>Numero</th>
+            <th>DNI</th>
+            <th>Dirección</th>
+            <th>Referencia</th>
+            <th>Correo</th>
+            <th>Estado</th>
+            <th>Fecha Registro</th>
+        </tr>
+        {%for registro in registros %}
+            <tr>
+                <td>{{registro.id}}</td>
+                <td>{{registro.full_name}}</td>
+                <td>{{registro.cellphone}}</td>
+                <td>{{registro.id_number}}</td>
+                <td>{{registro.address}}</td>
+                <td>{{registro.address_reference}}</td>
+                <td>{{registro.email}}</td>
+                <td>{{registro.status}}</td>
+                <td>{{registro.registrationDate}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
