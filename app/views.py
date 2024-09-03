@@ -2,6 +2,7 @@ from flask import json, render_template, request, redirect, url_for, flash, sess
 from werkzeug.utils import secure_filename
 from .business_logic import *
 from .data_access import *
+from app.format.json_format import msg_format
 import os
 import http.client
 
@@ -29,7 +30,7 @@ def init_app(app):
     def verify_token(req):
         token = req.args.get('hub.verify_token')
         challenge = req.args.get('hub.challenge')
-        if challenge and token == 'token': #Reemplazar con variable de entorno
+        if challenge and token == 'token':
             return challenge
         else:
             return jsonify({'error': 'Token Invalido'}), 401
@@ -70,7 +71,6 @@ def init_app(app):
                         number = messages["from"]
                         update_user_row(number = number)
                         update_conversation_logs(number = number, msg = txt)
-                        update_user_row(number = number, address = "before send_txt")
                         send_txt(txt, number)
             
             return jsonify({'message': 'EVENT_RECEIVED'})
@@ -79,25 +79,15 @@ def init_app(app):
     
 def send_txt(txt, number):
     txt = txt.lower()
-    update_user_row(number = number, address_reference = "entered send_txt")
     
     if txt == "hola":
-        update_user_row(number = number, email = "got hola")
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": number,
-            "text": {
-                "preview_url": False,
-                "body": "🤖 Hola, ¿Cómo estas? Bienvenido."
-            }
-        }
+        data = msg_format(number, "🤖 Hola, ¿Cómo estas? Bienvenido.")
         send_response(data)
 
 
 
 def send_response(data):
-    data = json.dumps(data)  # Convertir el diccionario en formato JSON
+    data = json.dumps(data)
 
     headers = {
         "Content-Type": "application/json",
