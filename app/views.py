@@ -14,7 +14,8 @@ def init_app(app):
     @app.route('/')
     def index():
         registros = get_all_users()
-        return render_template('index.html', registros = registros)
+        conversations = get_all_convs()
+        return render_template('index.html', registros = registros, conversations = conversations)
     
     @app.route('/webhook', methods=['GET', 'POST'])
     def webhook():
@@ -54,18 +55,21 @@ def init_app(app):
                             txt = messages["interactive"]["button_reply"]["id"]
                             number = messages["from"]
                             update_user_row(number = number)
+                            update_conversation_logs(number = number, msg = txt)
                             send_txt(txt, number)
                             
                         elif interactive_type == "list_reply":
                             txt = messages["interactive"]["list_reply"]["id"]
                             number = messages["from"]
                             update_user_row(number = number)
+                            update_conversation_logs(number = number, msg = txt)
                             send_txt(txt, number)
                             
                     if "text" in messages:
                         txt = messages["text"]["body"]
                         number = messages["from"]
                         update_user_row(number = number)
+                        update_conversation_logs(number = number, msg = txt)
                         send_txt(txt, number)
             
             update_user_row(number = number, json = json.dumps(messages)) 

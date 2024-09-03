@@ -49,5 +49,26 @@
             </tr>
         {% endfor %}
     </table>
+
+    <table>
+        <tr>
+            <th>id</th>
+            <th>cellphone</th>
+            <th>msg</th>
+            <th>ex_function</th>
+            <th>branch</th>
+            <th>date_time</th>
+        </tr>
+        {%for conv in conversations %}
+            <tr>
+                <td>{{conv.id}}</td>
+                <td>{{conv.cellphone}}</td>
+                <td>{{conv.msg}}</td>
+                <td>{{conv.ex_funct}}</td>
+                <td>{{conv.branch}}</td>
+                <td>{{conv.date_time}}</td>
+            </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
