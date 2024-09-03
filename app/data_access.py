@@ -19,5 +19,6 @@ class Conversations(db.Model):
     msg = db.Column(db.TEXT, nullable=True)
     ex_funct = db.Column(db.TEXT, nullable=True)
     branch = db.Column(db.String(10), nullable=True)
+    status = db.Column(db.TEXT, nullable=True)
     date_time = db.Column(db.DateTime, default = datetime.utcnow)
     

@@ -1,13 +1,9 @@
-from flask import json, render_template, request, redirect, url_for, flash, session
+from flask import json, jsonify, render_template, request, redirect, url_for, flash, session
 from werkzeug.utils import secure_filename
 from .business_logic import *
 from .data_access import *
-from app.format.json_format import msg_format
+from app.msgs.msg_send import send_txt
 import os
-import http.client
-
-token_env = os.environ.get('token_env')
-req_env = os.environ.get('req_env')
 
 cellphone = os.environ.get('cellphone') or "51998249361"
 
@@ -77,28 +73,3 @@ def init_app(app):
         except Exception as e:
             return jsonify({'message': 'EVENT_RECEIVED'})
     
-def send_txt(txt, number):
-    txt = txt.lower()
-    
-    if txt == "hola":
-        data = msg_format(number, "🤖 Hola, ¿Cómo estas? Bienvenido.")
-        send_response(data)
-
-
-
-def send_response(data):
-    data = json.dumps(data)
-
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": token_env
-    }
-    connection = http.client.HTTPSConnection("graph.facebook.com")    
-    try:
-        connection.request("POST", req_env, data, headers)
-        response = connection.getresponse()
-        print(response.status, response.reason)
-    except Exception as e:
-        print(e)
-    finally:
-        connection.close()
