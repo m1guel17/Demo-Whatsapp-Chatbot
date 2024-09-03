@@ -70,7 +70,7 @@ def init_app(app):
                         number = messages["from"]
                         update_user_row(number = number)
                         update_conversation_logs(number = number, msg = txt)
-                        update_user_row(address = "before send_txt")
+                        update_user_row(number = number, address = "before send_txt")
                         send_txt(txt, number)
             
             return jsonify({'message': 'EVENT_RECEIVED'})
@@ -79,10 +79,10 @@ def init_app(app):
     
 def send_txt(txt, number):
     txt = txt.lower()
-    update_user_row(address_reference = "entered send_txt")
+    update_user_row(number = number, address_reference = "entered send_txt")
     
     if txt == "hola":
-        update_user_row(email = "got hola")
+        update_user_row(number = number, email = "got hola")
         data = {
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
