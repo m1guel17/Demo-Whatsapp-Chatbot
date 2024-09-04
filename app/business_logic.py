@@ -26,8 +26,8 @@ def get_all_convs():
     return Conversations.query.all()
 
 def get_conv_row(number):
-    return Conversations.query.filter_by(cellphone=number).first()
-    #return Conversations.query.filter_by(cellphone=number).order_by(desc(Conversations.id)).first()
+    #return Conversations.query.filter_by(cellphone=number).first()
+    return Conversations.query.filter_by(cellphone=number).order_by(desc(Conversations.id)).first()
 
 def get_branch(number):
     return Conversations.query.filter_by(cellphone=number).order_by(desc(Conversations.id)).with_entities(Conversations.branch).first()
