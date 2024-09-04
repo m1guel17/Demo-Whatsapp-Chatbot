@@ -57,6 +57,7 @@
             <th>msg</th>
             <th>ex_function</th>
             <th>branch</th>
+            <th>status</th>
             <th>date_time</th>
         </tr>
         {%for conv in conversations %}
@@ -66,6 +67,7 @@
                 <td>{{conv.msg}}</td>
                 <td>{{conv.ex_funct}}</td>
                 <td>{{conv.branch}}</td>
+                <td>{{conv.status}}</td>
                 <td>{{conv.date_time}}</td>
             </tr>
         {% endfor %}

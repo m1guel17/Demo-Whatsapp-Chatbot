@@ -1,8 +1,6 @@
-from flask import json, jsonify, render_template, request, redirect, url_for, flash, session
-from werkzeug.utils import secure_filename
-from .business_logic import *
-from .data_access import *
-from app.msgs.msg_send import send_txt
+from flask import  jsonify, render_template, request
+from .business_logic import get_all_users,get_all_convs
+from app.msgs.msg_receive import receive_message
 import os
 
 cellphone = os.environ.get('cellphone') or "51998249361"
@@ -31,45 +29,5 @@ def init_app(app):
         else:
             return jsonify({'error': 'Token Invalido'}), 401
     
-    def receive_message(req):
-        try:
-            req = request.get_json()
-            entry = req["entry"][0]
-            changes = entry["changes"][0]
-            value = changes["value"]
-            msg_object = value["messages"]
-            
-            if msg_object:
-                messages = msg_object[0]
-
-                if "type" in messages:
-                    type = messages["type"]
-                    
-                    if type == "interactive":
-                        interactive_type = messages["interactive"]["type"]
-
-                        if interactive_type == "button_reply":
-                            txt = messages["interactive"]["button_reply"]["id"]
-                            number = messages["from"]
-                            update_user_row(number = number)
-                            update_conversation_logs(number = number, msg = txt)
-                            send_txt(txt, number)
-                            
-                        elif interactive_type == "list_reply":
-                            txt = messages["interactive"]["list_reply"]["id"]
-                            number = messages["from"]
-                            update_user_row(number = number)
-                            update_conversation_logs(number = number, msg = txt)
-                            send_txt(txt, number)
-                            
-                    if "text" in messages:
-                        txt = messages["text"]["body"]
-                        number = messages["from"]
-                        update_user_row(number = number)
-                        update_conversation_logs(number = number, msg = txt)
-                        send_txt(txt, number)
-            
-            return jsonify({'message': 'EVENT_RECEIVED'})
-        except Exception as e:
-            return jsonify({'message': 'EVENT_RECEIVED'})
+    
     
