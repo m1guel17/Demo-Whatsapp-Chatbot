@@ -1,4 +1,4 @@
-def msg_format(number, txt):
+def json(number, txt):
     msg = {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",

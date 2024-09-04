@@ -1,6 +1,6 @@
 from flask import request, jsonify
 from app.business_logic import update_user_row, update_conversation_logs
-from app.msgs.msg_send import send_txt
+from app.trunk.main import init_flow
 
 def receive_message(req):
         try:
@@ -24,21 +24,21 @@ def receive_message(req):
                             number = messages["from"]
                             update_user_row(number = number)
                             update_conversation_logs(number = number, msg = txt)
-                            send_txt(txt, number)
+                            init_flow(txt, number)
                             
                         elif interactive_type == "list_reply":
                             txt = messages["interactive"]["list_reply"]["id"]
                             number = messages["from"]
                             update_user_row(number = number)
                             update_conversation_logs(number = number, msg = txt)
-                            send_txt(txt, number)
+                            init_flow(txt, number)
                             
                     if "text" in messages:
                         txt = messages["text"]["body"]
                         number = messages["from"]
                         update_user_row(number = number)
                         update_conversation_logs(number = number, msg = txt)
-                        send_txt(txt, number)
+                        init_flow(txt, number)
             
             return jsonify({'message': 'EVENT_RECEIVED'})
         except Exception as e:
