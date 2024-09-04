@@ -8,7 +8,7 @@ def init_flow(txt, number):
     user_state = get_row(number)
     branch_state = get_conv_row(number)
     
-    msg = "🤖 Hola, ¿Cómo estas? Bienvenido. \n branch state: " + branch_state.status
+    msg = "🤖 Hola, ¿Cómo estas? Bienvenido. \n branch state: " + branch_state.branch
     
     if txt == "hola":
         data = json(number, msg)
