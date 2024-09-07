@@ -13,7 +13,6 @@ def init_flow(txt, number):
     else:
         initial_options(number, txt)
         branch_state = get_branch(number)
-        
         match branch_state:
             case "010":
                 branch_010(number, txt)
@@ -23,6 +22,8 @@ def initial_options(number, txt):
         case "1":
             msg = "Absolutely! We offer a range of products, including [Product A], [Product B], and [Product C]. Would you like a detailed breakdown of features, pricing, or perhaps a demo to see the product in action?"
             data = txt_json(number, msg)
+            send_response(data)
+            data = button_json(number, "We offer a range of products, including [Product A], [Product B], and [Product C].", "Choose one option", ["[Product A]", "[Product B]", "[Product C]"])
             send_response(data)
             update_conversation_logs(number = number, msg = txt, branch = "010")
             
