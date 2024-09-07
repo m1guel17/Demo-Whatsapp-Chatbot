@@ -1,5 +1,5 @@
 from app.msgs.api_wsp import send_response
-from app.format.json import json
+from app.format.json import txt_json
 
 def start_point(number, conv_state):
     x,y,z = [int(char) for char in conv_state]
@@ -12,5 +12,5 @@ def start_point(number, conv_state):
                             x0y0z1(number)
 
 def x0y0z1(number):
-    data = json(number, "🤖 Hola, ¿Cómo estas? Bienvenido!!!!")
+    data = txt_json(number, "🤖 Hola, ¿Cómo estas? Bienvenido!!!!")
     send_response(data)
