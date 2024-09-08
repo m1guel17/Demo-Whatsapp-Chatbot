@@ -11,7 +11,13 @@ def init_flow(txt, number):
         data = txt_json(number, msg)
         send_response(data)
     else:
-        if txt != "001":
+        data = txt_json(number, get_branch(number))
+        send_response(data)
+        
+        if get_branch(number) == "001":
+            initial_options(number, txt)
+            
+        else:
             match txt:
                 case "011":
                     branch_011(number, txt)
@@ -21,8 +27,6 @@ def init_flow(txt, number):
                 
                 case "013":
                     branch_013(number, txt)
-        else:
-            initial_options(number, txt)
                 
 def initial_options(number, txt):
     match txt:
