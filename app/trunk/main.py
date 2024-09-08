@@ -1,6 +1,6 @@
 from app.msgs.api_wsp import send_response
 from app.format.json import txt_json, button_json
-from app.business_logic import get_branch, update_user_row, update_conversation_logs
+from app.business_logic import get_conv_row, get_branch, update_user_row, update_conversation_logs
 from app.trunk.branch_1 import branch_011, branch_012, branch_013
 
 def init_flow(txt, number):
@@ -11,10 +11,12 @@ def init_flow(txt, number):
         data = txt_json(number, msg)
         send_response(data)
     else:
-        data = txt_json(number, get_branch(number))
+        branch = get_conv_row(number)
+        
+        data = txt_json(number, branch.branch)
         send_response(data)
         
-        if get_branch(number) == "001":
+        if branch.branch == "001":
             initial_options(number, txt)
             
         else:
