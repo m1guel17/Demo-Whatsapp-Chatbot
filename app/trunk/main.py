@@ -1,7 +1,7 @@
 from app.msgs.api_wsp import send_response
 from app.format.json import txt_json, button_json
 from app.business_logic import get_branch, update_user_row, update_conversation_logs
-from app.trunk.branch_1 import branch_010
+from app.trunk.branch_1 import branch_011, branch_012, branch_013
 
 def init_flow(txt, number):
     txt = txt.lower()
@@ -11,11 +11,18 @@ def init_flow(txt, number):
         data = txt_json(number, msg)
         send_response(data)
     else:
-        initial_options(number, txt)
-        branch_state = get_branch(number)
-        match branch_state:
-            case "010":
-                branch_010(number, txt)
+        if txt != "001":
+            match txt:
+                case "011":
+                    branch_011(number, txt)
+                
+                case "012":
+                    branch_012(number, txt)
+                
+                case "013":
+                    branch_013(number, txt)
+        else:
+            initial_options(number, txt)
                 
 def initial_options(number, txt):
     match txt:
@@ -23,7 +30,10 @@ def initial_options(number, txt):
             msg = "Absolutely! We offer a range of products, including [Product A], [Product B], and [Product C]. Would you like a detailed breakdown of features, pricing, or perhaps a demo to see the product in action?"
             data = txt_json(number, msg)
             send_response(data)
-            data = button_json(number, "We offer a range of products, including [Product A], [Product B], and [Product C].", "Choose one option", ["[Product A]", "[Product B]", "[Product C]"])
+            
+            id = ["011","012","013"]
+            options = ["[Product A]", "[Product B]", "[Product C]"]
+            data = button_json(number, "We offer a range of products, including [Product A], [Product B], and [Product C].", "Choose one option",id, options)
             send_response(data)
             update_conversation_logs(number = number, msg = txt, branch = "010")
             

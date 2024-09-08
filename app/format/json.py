@@ -10,7 +10,7 @@ def txt_json(number, txt):
     }
     return msg
 
-def button_json(number, text, footer, options):
+def button_json(number, text, footer, id, options):
     buttton = {
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
@@ -29,21 +29,21 @@ def button_json(number, text, footer, options):
                         {
                             "type": "reply",
                             "reply": {
-                                "id": "011",
+                                "id": id[0],
                                 "title": options[0]
                             }
                         },
                         {
                             "type": "reply",
                             "reply": {
-                                "id": "012",
+                                "id": id[1],
                                 "title": options[1]
                             }
                         },
                         {
                             "type": "reply",
                             "reply": {
-                                "id": "013",
+                                "id": id[2],
                                 "title": options[2]
                             }
                         }
