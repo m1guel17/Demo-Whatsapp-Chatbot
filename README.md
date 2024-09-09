@@ -6,13 +6,11 @@ This repository contains a demo chatbot built in Python that leverages the Meta 
 ```
 CHATBOT-DEMO/
 ├── app/
+│   ├── format/
 │   ├── msgs/
-│   │   ├── msg_receive.py
-│   │   └── msg_send.py
-│   ├── shared/
-│   │   ├── config.txt
-│   │   └── log.py
 │   ├── trunk/
+│   │   ├── main.py
+│   │   ├── BranchesNode1.py
 │   │   └── branches.py
 │   ├── __init__.py
 │   ├── business_logic.py
