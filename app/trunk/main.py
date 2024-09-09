@@ -7,7 +7,7 @@ def init_flow(txt, number):
     txt = txt.lower()
     
     if "hola" in txt:
-        msg = "🤖 Hi there! 👋 Welcome to [Company Name]. I'm here to help you get started. How can I assist you today? \n1️⃣ Show buttons \n2️⃣  \n3️⃣ Others"
+        msg = "🤖 Hi there! 👋 Welcome to [Company Name]. I'm here to help you get started. How can I assist you today? \n1️⃣ Show Available Features\n2️⃣ Provide Assistance\n3️⃣ Schedule an Appointment \n4️⃣ Demo \n5️⃣ About [Company Name]"
         data = txt_json(number, msg)
         send_response(data)
         update_conversation_logs(number, branch = "001")
@@ -21,28 +21,33 @@ def init_flow(txt, number):
                 
             case "010":
                 start_point(number, txt)
-            
-        
                 
         
                 
 def initial_options(number, txt):
     match txt:
         case "1":
-            msg = "Absolutely! We offer a range of products, including [Product A], [Product B], and [Product C]. Would you like a detailed breakdown of features, pricing, or perhaps a demo to see the product in action?"
+            msg = "Here’s a list of what I can help you with. Choose any feature to see it in action!"
             data = txt_json(number, msg)
             send_response(data)
+                
+            msg = "\n1️⃣ Buttons \n2️⃣ List 📋\n3️⃣ \n4️⃣ Link 🔗\n5️⃣ Image 🖼️\n6️⃣ Document 📄\n Send Email 📧"
             
+            
+            update_conversation_logs(number = number, msg = txt, branch = "010")
+            
+            """
             id = ["011","012","013"]
             options = ["[Product A]", "[Product B]", "[Product C]"]
             data = button_json(number, "We offer a range of products, including [Product A], [Product B], and [Product C].", "Choose one option",id, options)
             send_response(data)
-            update_conversation_logs(number = number, msg = txt, branch = "010")
+            """
             
         case "2":
-            msg = "No problem! I'm here to help. Could you describe the issue you're experiencing, or let me know if you're looking for assistance with an order, troubleshooting, or something else?"
+            msg = "Let me guide you through! What kind of assistance are you looking for?"
             data = txt_json(number, msg)
             send_response(data)
+            
             update_conversation_logs(number = number, msg = txt, branch = "020")
         
         case "3":
