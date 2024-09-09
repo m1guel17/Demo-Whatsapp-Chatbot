@@ -6,12 +6,15 @@ from app.trunk.node1 import start_node1
 def init_flow(txt, number):
     txt = txt.lower()
     
+    if "clear" in txt:
+        update_conversation_logs(number, branch = "001")
+    
     if "hola" in txt:
-        msg = "🤖 Hi there! 👋 Welcome to [Company Name]. I'm here to help you get started. How can I assist you today? \n1️⃣ Show Available Features\n2️⃣ Provide Assistance\n3️⃣ Schedule an Appointment \n4️⃣ About [Company Name]"
+        msg = "🤖 Hi there! 👋 Welcome to [Company Name]. How can I assist you today? Choose one of the following options: \n1️⃣ Show Available Features\n2️⃣ Provide Assistance\n3️⃣ Schedule an Appointment \n4️⃣ About [Company Name]"
         data = txt_json(number, msg)
         send_response(data)
         update_conversation_logs(number, branch = "001")
-        
+     
     else:
         branch = get_conv_row(number)
         
@@ -27,16 +30,10 @@ def init_flow(txt, number):
 def initial_options(number, txt):
     match txt:
         case "1":
-            msg = "Here’s a list of what I can help you with. Choose any feature to see it in action!"
+            msg = "Here’s a list of what I can help you with. Choose any feature to see it in action!\n\n1️⃣ Buttons 🔘\n2️⃣ List 📋\n3️⃣ Image 🖼️\n4️⃣ Document 📄\n5️⃣ Send Email 📧"
             data = txt_json(number, msg)
             send_response(data)
-                
-            msg = "1️⃣ Buttons 🔘\n2️⃣ List 📋\n3️⃣ \n4️⃣ Link 🔗\n5️⃣ Image 🖼️\n6️⃣ Document 📄\n7️⃣ Send Email 📧"
-            data = txt_json(number, msg)
-            send_response(data)
-            
             update_conversation_logs(number = number, msg = txt, branch = "010")
-
             
         case "2":
             msg = "Let me guide you through! What kind of assistance are you looking for?"
