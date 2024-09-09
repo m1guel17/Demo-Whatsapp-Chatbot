@@ -31,7 +31,9 @@ def initial_options(number, txt):
             data = txt_json(number, msg)
             send_response(data)
                 
-            msg = "\n1️⃣ Buttons \n2️⃣ List 📋\n3️⃣ \n4️⃣ Link 🔗\n5️⃣ Image 🖼️\n6️⃣ Document 📄\n Send Email 📧"
+            msg = "\n1️⃣ Buttons 🔘\n2️⃣ List 📋\n3️⃣ \n4️⃣ Link 🔗\n5️⃣ Image 🖼️\n6️⃣ Document 📄\n Send Email 📧"
+            data = txt_json(number, msg)
+            send_response(data)
             
             
             update_conversation_logs(number = number, msg = txt, branch = "010")
