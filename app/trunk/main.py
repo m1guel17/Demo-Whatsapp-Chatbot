@@ -1,13 +1,13 @@
 from app.msgs.api_wsp import send_response
 from app.format.json import txt_json, button_json
 from app.business_logic import get_conv_row, update_user_row, update_conversation_logs
-from app.trunk.node1 import start_point
+from app.trunk.node1 import start_node1
 
 def init_flow(txt, number):
     txt = txt.lower()
     
     if "hola" in txt:
-        msg = "🤖 Hi there! 👋 Welcome to [Company Name]. I'm here to help you get started. How can I assist you today? \n1️⃣ Show Available Features\n2️⃣ Provide Assistance\n3️⃣ Schedule an Appointment \n4️⃣ Demo \n5️⃣ About [Company Name]"
+        msg = "🤖 Hi there! 👋 Welcome to [Company Name]. I'm here to help you get started. How can I assist you today? \n1️⃣ Show Available Features\n2️⃣ Provide Assistance\n3️⃣ Schedule an Appointment \n4️⃣ About [Company Name]"
         data = txt_json(number, msg)
         send_response(data)
         update_conversation_logs(number, branch = "001")
@@ -20,7 +20,7 @@ def init_flow(txt, number):
                 initial_options(number, txt)
                 
             case "010":
-                start_point(number, txt)
+                start_node1(number, txt)
                 
         
                 
@@ -31,19 +31,12 @@ def initial_options(number, txt):
             data = txt_json(number, msg)
             send_response(data)
                 
-            msg = "\n1️⃣ Buttons 🔘\n2️⃣ List 📋\n3️⃣ \n4️⃣ Link 🔗\n5️⃣ Image 🖼️\n6️⃣ Document 📄\n Send Email 📧"
+            msg = "1️⃣ Buttons 🔘\n2️⃣ List 📋\n3️⃣ \n4️⃣ Link 🔗\n5️⃣ Image 🖼️\n6️⃣ Document 📄\n7️⃣ Send Email 📧"
             data = txt_json(number, msg)
             send_response(data)
             
-            
             update_conversation_logs(number = number, msg = txt, branch = "010")
-            
-            """
-            id = ["011","012","013"]
-            options = ["[Product A]", "[Product B]", "[Product C]"]
-            data = button_json(number, "We offer a range of products, including [Product A], [Product B], and [Product C].", "Choose one option",id, options)
-            send_response(data)
-            """
+
             
         case "2":
             msg = "Let me guide you through! What kind of assistance are you looking for?"
@@ -53,10 +46,21 @@ def initial_options(number, txt):
             update_conversation_logs(number = number, msg = txt, branch = "020")
         
         case "3":
-            msg = "Got it! Feel free to let me know what you're looking for, and I’ll do my best to assist you"
+            msg = "You can book an appointment with us. Choose your preferred service and time below."
             data = txt_json(number, msg)
             send_response(data)
+            
+            msg = "1️⃣Consultation Call \n2️⃣Product Demo \n3️⃣Troubleshooting Session"
+            data = txt_json(number, msg)
+            send_response(data)
+            
             update_conversation_logs(number = number, msg = txt, branch = "030")
+            
+        case "4":
+            msg = "We are [Company Name], a team dedicated to providing top-quality services and innovative solutions tailored to your needs. Our mission is to [insert mission statement], and we pride ourselves on [core values or unique aspects]. Whether you’re here to explore our services or need assistance, we’re always here to help \n\n * 🌐 link_demo.com \n* 📞 (xx) xx x xxxx \n* 💬 email_demo@domain.w3"
+            data = txt_json(number, msg)
+            send_response(data)
+            update_conversation_logs(number = number, msg = txt, branch = "040")
     
 
 
