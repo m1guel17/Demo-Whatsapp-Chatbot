@@ -23,23 +23,23 @@ def receive_message(req):
                             txt = messages["interactive"]["button_reply"]["id"]
                             title = messages["interactive"]["button_reply"]["title"]
                             number = messages["from"]
-                            update_user_row(number = number)
-                            update_conversation_logs(number = number, msg = (txt + " - " + title))
+                            update_user_row(number)
+                            update_conversation_logs(number, msg = (txt + " - " + title))
                             init_flow(txt, number)
                             
                         elif interactive_type == "list_reply":
                             txt = messages["interactive"]["list_reply"]["id"]
                             title = messages["interactive"]["list_reply"]["title"]
                             number = messages["from"]
-                            update_user_row(number = number)
-                            update_conversation_logs(number = number, msg = (txt + " - " + title))
+                            update_user_row(number)
+                            update_conversation_logs(number, msg = (txt + " - " + title))
                             init_flow(txt, number)
                             
                     if "text" in messages:
                         txt = messages["text"]["body"]
                         number = messages["from"]
-                        update_user_row(number = number)
-                        update_conversation_logs(number = number, msg = txt)
+                        update_user_row(number)
+                        update_conversation_logs(number, msg = txt)
                         init_flow(txt, number)
             
             return jsonify({'message': 'EVENT_RECEIVED'})

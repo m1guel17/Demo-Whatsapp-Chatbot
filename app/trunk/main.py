@@ -1,7 +1,8 @@
 from app.msgs.api_wsp import send_response
 from app.format.json import txt_json, button_json
 from app.business_logic import get_conv_row, get_branch, update_user_row, update_conversation_logs
-from app.trunk.branch_1 import branch_011, branch_012, branch_013
+from app.trunk.BranchesNode1 import branch_011, branch_012, branch_013
+from app.trunk.newclient_flow import start_point
 
 def init_flow(txt, number):
     txt = txt.lower()
@@ -10,25 +11,30 @@ def init_flow(txt, number):
         msg = "🤖 Hi there! 👋 Welcome to [Company Name]. I'm here to help you get started. How can I assist you today? \n1️⃣ Product information \n2️⃣ Support \n3️⃣ Others"
         data = txt_json(number, msg)
         send_response(data)
+        update_conversation_logs(number, branch = "002")
+        
     else:
         branch = get_conv_row(number)
+        if branch.branch == "002": initial_options(number, txt)
         
-        data = txt_json(number, branch.branch)
-        send_response(data)
+        if branch.branch[1] == "1": start_point(number, branch.branch)
         
-        if branch.branch == "001":
-            initial_options(number, txt)
-            
-        else:
-            match txt:
-                case "011":
-                    branch_011(number, txt)
+        """
+        match branch.branch:
+            case "002":
+                initial_options(number, txt)
                 
-                case "012":
-                    branch_012(number, txt)
+            case "011":
+                branch_011(number)
                 
-                case "013":
-                    branch_013(number, txt)
+            case "012":
+                branch_012(number)
+
+            case "013":
+                branch_013(number)
+        """
+                
+        
                 
 def initial_options(number, txt):
     match txt:
