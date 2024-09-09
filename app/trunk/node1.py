@@ -1,7 +1,7 @@
 from app.trunk.branchesNode1 import branch_011, branch_012, branch_013
 
-def node1_start(number, state):
-    x,y,z = [int(char) for char in state]
+def start_point(number, conv_state):
+    x,y,z = [int(char) for char in conv_state]
     match x:
         case 0:
             match y:
