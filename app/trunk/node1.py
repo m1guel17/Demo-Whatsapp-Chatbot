@@ -1,4 +1,4 @@
-from app.trunk.branchesnode import branch_011, branch_012, branch_013
+from app.trunk.node1branches import branch_011, branch_012, branch_013
 
 def start_point(number, conv_state):
     x,y,z = [int(char) for char in conv_state]

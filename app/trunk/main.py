@@ -7,32 +7,22 @@ def init_flow(txt, number):
     txt = txt.lower()
     
     if "hola" in txt:
-        msg = "🤖 Hi there! 👋 Welcome to [Company Name]. I'm here to help you get started. How can I assist you today? \n1️⃣ Product information \n2️⃣ Support \n3️⃣ Others"
+        msg = "🤖 Hi there! 👋 Welcome to [Company Name]. I'm here to help you get started. How can I assist you today? \n1️⃣ Show buttons \n2️⃣  \n3️⃣ Others"
         data = txt_json(number, msg)
         send_response(data)
-        update_conversation_logs(number, branch = "002")
+        update_conversation_logs(number, branch = "001")
         
     else:
         branch = get_conv_row(number)
         
-        if branch.branch == "002": initial_options(number, txt)
-        
-        if branch.branch == "010": start_point(number, txt)
-        
-        """
         match branch.branch:
-            case "002":
+            case "001":
                 initial_options(number, txt)
                 
-            case "011":
-                branch_011(number)
-                
-            case "012":
-                branch_012(number)
-
-            case "013":
-                branch_013(number)
-        """
+            case "010":
+                start_point(number, txt)
+            
+        
                 
         
                 
