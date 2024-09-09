@@ -14,6 +14,7 @@ def init_flow(txt, number):
         
     else:
         branch = get_conv_row(number)
+        
         if branch.branch == "002": initial_options(number, txt)
         
         if branch.branch == "010": start_point(number, txt)
