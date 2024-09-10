@@ -52,3 +52,40 @@ def button_json(number, text, footer, id, options):
             }
         }
     return buttton
+
+def list_json(number, text, footer, title, id, options):
+    list_ = {
+            "messaging_product": "whatsapp",
+            "to": number,
+            "type": "interactive",
+            "interactive": {
+                "type": "list",
+                "body": {
+                    "text": text
+                },
+                "footer": {
+                    "text": footer
+                },
+                "action":{
+                    "button": "See Options",
+                    "sections": [
+                        {
+                            "title": title,
+                            "rows": [
+                                {
+                                    "id": id[0],
+                                    "title": options[0],
+                                    "description": "Compra los mejores artículos de tecnología"
+                                },
+                                {
+                                    "id": id[1],
+                                    "title": options[1],
+                                    "description": "Vende lo que ya no estés usando"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    return list_
