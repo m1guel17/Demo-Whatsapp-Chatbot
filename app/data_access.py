@@ -18,7 +18,10 @@ class Conversations(db.Model):
     cellphone = db.Column(db.TEXT, unique=True, nullable=False)
     msg = db.Column(db.TEXT, nullable=True)
     ex_funct = db.Column(db.TEXT, nullable=True)
-    branch = db.Column(db.TEXT, nullable=True)
+    hlVl0 = db.Column(db.Integer, nullable=False)
+    hlVl1 = db.Column(db.Integer, nullable=False)
+    hlVl2 = db.Column(db.Integer, nullable=False)
+    hlVl3 = db.Column(db.Integer, nullable=False)
     status = db.Column(db.TEXT, nullable=True)
     date_time = db.Column(db.DateTime, default = datetime.utcnow)
     

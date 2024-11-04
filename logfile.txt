@@ -1,0 +1,1 @@
+2024-09-15 00:48:51,944 - ERROR - The item at index #1, '5', is not a string - int

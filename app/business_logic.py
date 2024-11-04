@@ -47,7 +47,7 @@ def update_conversation_logs(number , **kwargs):
     conv_state = get_conv_row(number)
         
     if not conv_state:
-        conv_state = Conversations(cellphone=number, branch = "000", ex_funct = json.dumps(contexts), status = "OPEN")
+        conv_state = Conversations(cellphone=number, hlVl0 = 0, hlVl1 = 0, hlVl2 = 0, hlVl3 = 0, ex_funct = json.dumps(contexts), status = "OPEN")
         db.session.add(conv_state)
         db.session.commit()
         
